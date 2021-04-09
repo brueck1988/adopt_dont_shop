@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the pets index' do
+RSpec.describe 'the applications index' do
   before(:each) do
     @shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
     @pet_1 = @shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
