@@ -12,8 +12,6 @@ RSpec.describe Application, type: :model do
     it { should validate_presence_of(:city) }
     it { should validate_presence_of(:state) }
     it { should validate_numericality_of(:zip_code) }
-    # it { should validate_presence_of(:description) }
-    # it { should validate_presence_of(:status) }
   end
 
   before(:each) do
@@ -64,34 +62,3 @@ RSpec.describe Application, type: :model do
     @pet_application_7 = PetApplication.create!(pet: @pet_1, application: @application_4)
   end
 end
-
-
-
-
-
-
-
-
-
-#   describe 'class methods' do
-#     describe '#search' do
-#       it 'returns partial matches' do
-#         expect(Pet.search("Claw")).to eq([@pet_2])
-#       end
-#     end
-#
-#     describe '#adoptable' do
-#       it 'returns adoptable pets' do
-#         expect(Pet.adoptable).to eq([@pet_1, @pet_2])
-#       end
-#     end
-#   end
-#
-#   describe 'instance methods' do
-#     describe '.shelter_name' do
-#       it 'returns the shelter name for the given pet' do
-#         expect(@pet_3.shelter_name).to eq(@shelter_1.name)
-#       end
-#     end
-#   end
-# end

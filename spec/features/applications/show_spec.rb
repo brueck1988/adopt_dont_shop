@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'the pets index' do
+RSpec.describe 'the application show page' do
   before(:each) do
     @shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
     @pet_1 = @shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
@@ -62,5 +62,18 @@ RSpec.describe 'the pets index' do
       expect(page).to have_content(@pet_1.name)
       expect(page).to have_content(@pet_2.name)
       expect(page).to have_content(@pet_3.name)
+  end
+
+  it "shows Add a Pet to this Application if the application has not been submitted" do
+    visit "/applications/#{@application_3.id}"
+    expect(page).to have_button("Search")
+
+    fill_in "Add a Pet to this Application", with: "a"
+
+    click_button 'Search'
+
+    expect(page).to have_content(@pet_1.name)
+    expect(page).to have_content(@pet_2.name)
+    expect(page).to have_content(@pet_3.name)
   end
 end
