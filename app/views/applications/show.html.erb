@@ -26,6 +26,7 @@
 <% if !@pets.nil?%>
   <% @pets.each do |pet|%>
       <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+      <%= button_to "Adopt #{pet.name}", { action: "update"}, method: :patch, params: {pet_name: pet.name, pet_id: pet.id} %>
     <br>
     <% end %>
 <% end %>

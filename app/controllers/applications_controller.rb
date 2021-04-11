@@ -15,7 +15,6 @@ class ApplicationsController < ApplicationController
 
   def create
     @application = Application.new(application_params)
-
     if @application.save
       redirect_to "/applications/#{@application.id}"
     else
@@ -24,8 +23,14 @@ class ApplicationsController < ApplicationController
     end
   end
 
+  def update
+    @application = Application.find(params[:id])
+    PetApplication.create!(application_id: @application.id, pet_id: params[:pet_id])
+    render :show
+  end
+
   private
   def application_params
-    params.permit(:id, :name, :street_address, :city, :state, :zip_code, :description, :status)
+    params.permit(:id, :name, :street_address, :city, :state, :zip_code, :description, :status) #:pet_id
   end
 end

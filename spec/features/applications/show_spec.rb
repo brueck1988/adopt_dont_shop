@@ -64,16 +64,23 @@ RSpec.describe 'the application show page' do
       expect(page).to have_content(@pet_3.name)
   end
 
-  it "shows Add a Pet to this Application if the application has not been submitted" do
-    visit "/applications/#{@application_3.id}"
-    expect(page).to have_button("Search")
+  context "If the application status is in progress" do
+    it "a pet can be searched for and added to application" do
+      visit "/applications/#{@application_3.id}"
+      expect(page).to have_button("Search")
 
-    fill_in "Add a Pet to this Application", with: "a"
+      fill_in "Add a Pet to this Application", with: "a"
 
-    click_button 'Search'
+      click_button 'Search'
 
-    expect(page).to have_content(@pet_1.name)
-    expect(page).to have_content(@pet_2.name)
-    expect(page).to have_content(@pet_3.name)
+      expect(page).to have_content(@pet_1.name)
+      expect(page).to have_content(@pet_2.name)
+      expect(page).to have_content(@pet_3.name)
+
+      expect(page).to have_button("Adopt #{@pet_1.name}")
+
+      click_on "Adopt #{@pet_1.name}"
+      expect(page).to have_content(@pet_1.name)
+    end
   end
 end
